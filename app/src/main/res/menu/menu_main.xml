@@ -2,9 +2,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.health_monitoring_app.MainActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/abc_vector_test"
+            android:title="@string/nav_message"/>
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/abc_vector_test"
+            android:title="@string/nav_profile"/>
+    </group>
+
+    <item android:title="@string/action_settings">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:title="@string/nav_settings"
+                android:icon="@drawable/abc_vector_test"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/nav_info"
+                android:title="@string/nav_info"
+                android:icon="@drawable/abc_vector_test"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/nav_logout"
+                android:title="@string/nav_logout"
+                android:icon="@drawable/abc_vector_test"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>
