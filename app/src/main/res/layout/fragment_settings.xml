@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/settings_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth Setting"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/settings_BT_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connected bluetooth device:"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"/>
+
+    <TextView
+        android:id="@+id/settings_conn_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:text="Health-Device-Hexoskin"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"/>
+
+    <Button
+        android:id="@+id/settings_BT_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan for BT device"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"/>
+
+
+
+</LinearLayout>

@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".ProfileFragment"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/profile_personal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="550dp"
         android:text="Personal Information"
         android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/profile_username_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Username"
+        android:paddingVertical="10dp"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:layout_marginLeft="40dp"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/profile_username"
@@ -25,27 +34,50 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
-        android:paddingVertical="10dp"
         android:text="jasonC"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_personal" />
+        android:paddingVertical="10dp"
+        android:maxLines="1"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:id="@+id/profile_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="User's Name"
+        android:paddingVertical="10dp"
+        android:layout_marginRight="250dp"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:layout_marginLeft="40dp"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/profile_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
         android:paddingVertical="10dp"
         android:text="Jason Chun"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_username" />
+        android:maxLines="1"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:id="@+id/profile_emaillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="User's Email"
+        android:paddingVertical="10dp"
+        android:layout_marginRight="250dp"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:layout_marginLeft="40dp"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/profile_email"
@@ -53,13 +85,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
         android:paddingVertical="10dp"
         android:text="jasonC@gmail.com"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+        android:maxLines="1"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"/>
+
+    <TextView
+        android:id="@+id/profile_password_label"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="250dp"
+        android:paddingVertical="10dp"
+        android:text="User's Password"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/profile_password"
@@ -67,79 +111,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
         android:paddingVertical="10dp"
         android:text="password"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_email"/>
+        android:maxLines="1"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"/>
 
-    <TextView
-        android:id="@+id/profile_GP"
+    <Button
+        android:id="@+id/profile_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GP Information"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_password" />
-
-    <TextView
-        android:id="@+id/profile_gpClinic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:text="@string/profile_edit_button"
+        android:paddingHorizontal="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
-        android:paddingVertical="10dp"
-        android:text="Clinic"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_GP" />
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/profile_gpName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
-        android:paddingVertical="10dp"
-        android:text="GP Name"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_gpClinic" />
-
-    <TextView
-        android:id="@+id/profile_gpEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
-        android:paddingVertical="10dp"
-        android:text="ClinicEmail@gmail.com"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_gpName" />
-
-    <TextView
-        android:id="@+id/profile_gpContact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/border"
-        android:paddingHorizontal="120dp"
-        android:paddingVertical="10dp"
-        android:text="02105468795"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_gpEmail"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

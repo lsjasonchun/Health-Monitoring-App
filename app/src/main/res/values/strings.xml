@@ -11,10 +11,15 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="nav_home">Home</string>
     <string name="nav_profile">Profile</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_settings">Bluetooth Settings</string>
     <string name="nav_info">Information</string>
     <string name="nav_logout">Logout</string>
 
     <string name="navigation_drawer_open">Open Navgiation drawer</string>
     <string name="navigation_drawer_close">Close Navgiation drawer</string>
+    <string name="nav_gp_profile">GP Information</string>
+    <string name="profile_edit_button">Edit Profile Info</string>
+    <string name="gp_profile_edit_button">Edit Information</string>
+    <string name="reg_label">Registration</string>
+
 </resources>

@@ -3,33 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.health_monitoring_app.MainActivity">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/abc_vector_test"
-            android:title="@string/nav_home"/>
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/abc_vector_test"
-            android:title="@string/nav_profile"/>
-    </group>
+    <item android:title="Personal Infomation">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_home"
+                    android:icon="@drawable/ic_home_page"
+                    android:title="@string/nav_home"/>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_user_info_profile"
+                    android:title="@string/nav_profile"/>
+                <item
+                    android:id="@+id/nav_gp_profile"
+                    android:icon="@drawable/ic_gp_info"
+                    android:title="@string/nav_gp_profile"/>
+            </group>
+        </menu>
+    </item>
 
     <item android:title="@string/action_settings">
         <menu>
             <item
-                android:id="@+id/nav_settings"
+                android:id="@+id/nav_BT_settings"
                 android:title="@string/nav_settings"
-                android:icon="@drawable/abc_vector_test"
+                android:icon="@drawable/ic_settings"
                 app:showAsAction="never" />
             <item
                 android:id="@+id/nav_info"
                 android:title="@string/nav_info"
-                android:icon="@drawable/abc_vector_test"
+                android:icon="@drawable/ic_info"
                 app:showAsAction="never" />
             <item
                 android:id="@+id/nav_logout"
                 android:title="@string/nav_logout"
-                android:icon="@drawable/abc_vector_test"
+                android:icon="@drawable/ic_logout"
                 app:showAsAction="never" />
         </menu>
     </item>

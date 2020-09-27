@@ -1,46 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:paddingTop="20dp">
-
+    android:layout_height="match_parent"
+    android:paddingTop="0dp">
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/main_bt_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:paddingHorizontal="20dp"
-            android:text="Value"
+            android:text="Bluetooth Status: "
             android:textSize="30dp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="0/88"
-            android:layout_toRightOf="@+id/textView1"/>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/main_bt_status_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_marginTop="17dp"
             android:layout_marginBottom="2dp"
+            android:layout_toRightOf="@+id/main_bt_status"
             android:paddingHorizontal="20dp"
-            android:text="Value"
+            android:text="true"
             android:textSize="30dp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="0/88"
-            android:layout_toRightOf="@+id/textView2"
-            android:layout_below="@+id/editText1"/>
+            android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/main_ews_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_bt_status"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="EWS Value"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_ews_value"
+                    android:layout_marginTop="10dp"
+                    android:hint="0/88"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/main_pulse_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Pulse"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_pulse_label"
+                    android:layout_marginTop="10dp"
+                    android:hint="0/88"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/main_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Temperature"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_temperature"
+                    android:layout_marginTop="10dp"
+                    android:hint="0/88"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/main_blood_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText3"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Blood Pressure"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editText4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="0/88"
+                    android:inputType="number" />
+
+                <ImageButton
+                    android:id="@+id/main_help_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    android:onClick="SOSTask"
+                    android:src="@drawable/warning_sign" />
+
+                <TextView
+                    android:id="@+id/main_help_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Emergency button to call 111"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+        </LinearLayout>
+
+
+    </ScrollView>
+
 </RelativeLayout>

@@ -67,8 +67,13 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
                 break;
-            case R.id.nav_settings:
-
+            case R.id.nav_gp_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new GPFragment()).commit();
+                break;
+            case R.id.nav_BT_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SettingsFragment()).commit();
                 break;
             case R.id.nav_logout:
                 //Need to go back to Login Page.

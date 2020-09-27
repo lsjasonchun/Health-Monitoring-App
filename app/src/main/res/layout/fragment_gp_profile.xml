@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".ProfileFragment"
+android:orientation="vertical"
+android:gravity="center">
+
+<TextView
+    android:id="@+id/profile_gp_personal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="GP Information"
+    android:textAlignment="center"
+    android:textSize="30dp" />
+
+<TextView
+    android:id="@+id/profile_gpClinic_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:text="Clinic's Name"
+    android:paddingVertical="10dp"
+    android:textStyle="bold"
+    android:layout_gravity="left"
+    android:layout_marginLeft="40dp"
+    android:textSize="20dp"/>
+
+<TextView
+    android:id="@+id/profile_gpClinic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/border"
+    android:text="jasonC"
+    android:textAlignment="center"
+    android:paddingVertical="10dp"
+    android:maxLines="1"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="50dp"/>
+
+<TextView
+    android:id="@+id/profile_gpName_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:text="GP's Name"
+    android:paddingVertical="10dp"
+    android:layout_marginRight="250dp"
+    android:textStyle="bold"
+    android:layout_gravity="left"
+    android:layout_marginLeft="40dp"
+    android:textSize="20dp"/>
+
+<TextView
+    android:id="@+id/profile_gpName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    android:paddingVertical="10dp"
+    android:text="Jason Chun"
+    android:textAlignment="center"
+    android:maxLines="1"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="50dp"/>
+
+<TextView
+    android:id="@+id/profile_gp_email_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:text="GP's Email"
+    android:paddingVertical="10dp"
+    android:layout_marginRight="250dp"
+    android:textStyle="bold"
+    android:layout_gravity="left"
+    android:layout_marginLeft="40dp"
+    android:textSize="20dp"/>
+
+<TextView
+    android:id="@+id/profile_gpEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/border"
+    android:paddingVertical="10dp"
+    android:text="GP@gmail.com"
+    android:textAlignment="center"
+    android:maxLines="1"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="50dp"/>
+
+<TextView
+    android:id="@+id/profile_gp_contact_label"
+    android:layout_width="176dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="left"
+    android:layout_marginLeft="40dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="250dp"
+    android:paddingVertical="10dp"
+    android:text="GP's Contact Number"
+    android:textSize="20dp"
+    android:textStyle="bold" />
+
+<TextView
+    android:id="@+id/profile_gpContact"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/border"
+    android:paddingVertical="10dp"
+    android:text="0212132132"
+    android:textAlignment="center"
+    android:maxLines="1"
+    android:layout_marginRight="50dp"
+    android:layout_marginLeft="50dp"/>
+
+<Button
+    android:id="@+id/gp_edit_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/gp_profile_edit_button"
+    android:paddingHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_gravity="center"
+    android:textStyle="bold"/>
+
+</LinearLayout>
