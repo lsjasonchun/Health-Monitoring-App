@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -23,6 +24,7 @@ import java.nio.Buffer;
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
     Context context;
     AlertDialog alertDialog;
+    public static final String LOG_TAG = "myLogs";
 
     BackgroundWorker(Context ctx) {
         context = ctx;
@@ -30,9 +32,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String operation = params[0];
-        String login_url = "http://192.168.1.66:8089/login.php";
-        if(operation.equals("login")) {
+        String type = params[0];
+        String login_url = "http://192.168.1.66/client/login.php";
+        String register_url = "http://192.168.1.66/client/register.php";
+        if(type.equals("login")) {
             try {
                 String username = params[1];
                 String password = params[2];
@@ -71,7 +74,52 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             }
 
         }
-        return null;
+        else if(type.equals("register")) {
+            try {
+                Log.e(LOG_TAG,"Inside BACKGROUND REG");
+                String username = params[1];
+                String password = params[2];
+                String firstname = params[3];
+                String lastname = params[4];
+                String email = params[5];
+                URL url = new URL(register_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_Data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
+                        + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&"
+                        + URLEncoder.encode("first_name", "UTF-8") + "=" + URLEncoder.encode(firstname, "UTF-8") + "&"
+                        + URLEncoder.encode("last_name", "UTF-8") + "=" + URLEncoder.encode(lastname, "UTF-8") + "&"
+                        + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                bufferedWriter.write(post_Data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                while((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+            return null;
     }
 
     @Override
@@ -84,13 +132,17 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         if (result.equals("login success")) {
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-//
+
             Intent mainIntent = new Intent(context, MainActivity.class);
             mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(mainIntent);
             ((Activity) context).finish();
 
-        } else {
+        }
+        else if (result.equals("Insert Successful")) {
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        }
+        else {
             alertDialog.setMessage(result);
             alertDialog.show();
         }
