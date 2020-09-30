@@ -1,7 +1,6 @@
 package com.example.health_monitoring_app;
 
 import android.content.Intent;
-import android.drm.DrmStore;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,6 +18,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
+    public String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity
                     new MainFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
+
+        username = getIntent().getExtras().getString("arg");
     }
 
     @Override
@@ -64,8 +66,9 @@ public class MainActivity extends AppCompatActivity
                         new MainFragment()).commit();
                 break;
             case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                Intent profielIntent = new Intent(this, ProfileActivity.class);
+                profielIntent.putExtra("arg", username);
+                startActivity(profielIntent);
                 break;
             case R.id.nav_gp_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

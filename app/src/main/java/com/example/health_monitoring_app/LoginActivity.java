@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(getApplicationContext(),
                                     "Login Success.", Toast.LENGTH_LONG).show();
                             Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            mainIntent.putExtra("arg", username);
                             startActivity(mainIntent);
                         }
                         else{
@@ -116,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
-                loginTask.execute("http://10.0.2.2/client/login.php");
+                loginTask.execute("http://192.168.1.65//client/login.php");
                 break;
             case R.id.login_registerButton:
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);

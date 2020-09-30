@@ -19,12 +19,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.Buffer;
 
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
     Context context;
     AlertDialog alertDialog;
     public static final String LOG_TAG = "myLogs";
+    public BackgroundWorkerResponse delegate = null;
+
+    public interface BackgroundWorkerResponse {
+        void processFinish(String output);
+    }
 
     BackgroundWorker(Context ctx) {
         context = ctx;
@@ -33,8 +37,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://192.168.1.66/client/login.php";
-        String register_url = "http://192.168.1.66/client/register.php";
+        String login_url = "http://192.168.1.65:80/client/login.php";
+        String register_url = "http://192.168.1.65:80/client/register.php";
+        String fetchProfile_url = "http://192.168.1.65:80/client/client.php";
         if(type.equals("login")) {
             try {
                 String username = params[1];
@@ -119,6 +124,43 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
         }
+        else if(type.equals("fetchProfile")) {
+            try {
+                Log.e(LOG_TAG,"Inside BackgroundWorker fetchProfile");
+                String username = params[1];
+                URL url = new URL(fetchProfile_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_Data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+                bufferedWriter.write(post_Data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                while((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
             return null;
     }
 
@@ -143,8 +185,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         }
         else {
-            alertDialog.setMessage(result);
-            alertDialog.show();
+//            alertDialog.setMessage(result);
+//            alertDialog.show();
+            delegate.processFinish(result);
         }
     }
 
