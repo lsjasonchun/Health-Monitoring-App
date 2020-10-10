@@ -55,7 +55,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@color/defaultTextValue"/>
 
             <TextView
                 android:id="@+id/main_respiratory_label"
@@ -76,7 +77,8 @@
                 android:layout_below="@+id/main_pulse_label"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@color/defaultTextValue"/>
 
             <TextView
                 android:id="@+id/main_temperature"
@@ -96,7 +98,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@color/defaultTextValue"/>
 
             <TextView
                 android:id="@+id/main_blood_pressure"
@@ -116,7 +119,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@color/defaultTextValue"/>
 
             <TextView
                 android:id="@+id/main_heart_rate"
@@ -136,7 +140,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@color/defaultTextValue"/>
 
             <TextView
                 android:id="@+id/main_oxygen_sat"
@@ -156,7 +161,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@color/defaultTextValue"/>
 
             <TextView
                 android:id="@+id/main_consciousness"
@@ -176,7 +182,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@color/defaultTextValue"/>
 
             <ImageButton
                 android:id="@+id/main_help_button"
