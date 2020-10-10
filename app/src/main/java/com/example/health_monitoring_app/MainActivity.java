@@ -3,6 +3,7 @@ package com.example.health_monitoring_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity
 
     private DrawerLayout drawer;
     public String username;
+    public TextView ewsValueTV, breathRateTV, tempTV, bloodPressureTV, oxSatTV, heartRateTV, consciousLvlTV;
+    MainFragment mainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +30,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Main Activity");
+        getSupportActionBar().setTitle("Main Activity");
 
-        drawer =findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
+
+//        mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+//        mainFragment.setMainValues("80");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -85,5 +92,36 @@ public class MainActivity extends AppCompatActivity
         }
 
         return false;
+    }
+
+    public void setMainValues(){
+        breathRateTV = findViewById(R.id.main_respiratory_value);
+        tempTV = findViewById(R.id.main_temperature_value);
+        bloodPressureTV = findViewById(R.id.main_blood_pressure_value);
+        heartRateTV = findViewById(R.id.main_heart_rate_value);
+        oxSatTV = findViewById(R.id.main_oxygen_sat_value);
+        consciousLvlTV = findViewById(R.id.main_consciousness_value);
+
+//        breathRateTV.setText((int) 80);
+//        tempTV.setText("80");
+//        bloodPressureTV.setText("80");
+//        heartRateTV.setText("80");
+//        oxSatTV.setText("80");
+//        consciousLvlTV.setText("80");
+    }
+
+    public int calculateEWS(){
+        int ewsValue = 1;
+        int tempEws = 0;
+        int breathRateEws = 0;
+        int bloodPressureEws = 0;
+        int heartRateEws = 0;
+        int oxySatEws = 0;
+
+        ewsValueTV = findViewById(R.id.main_ews_value);
+
+//        switch ()
+
+        return ewsValue;
     }
 }
