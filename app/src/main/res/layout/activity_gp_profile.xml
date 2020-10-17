@@ -94,7 +94,7 @@ android:gravity="center">
 
 <TextView
     android:id="@+id/profile_gp_contact_label"
-    android:layout_width="176dp"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:layout_gravity="left"
     android:layout_marginLeft="40dp"

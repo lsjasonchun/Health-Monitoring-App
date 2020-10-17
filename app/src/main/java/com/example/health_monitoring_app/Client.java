@@ -2,17 +2,21 @@ package com.example.health_monitoring_app;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
 
     private String username, firstName, lastName, password, email, fullName;
-    private int id;
+    private int id, gp_id;
 
-    public Client(int id, String username, String firstName, String lastName, String password, String email) {
+    public Client(int id, String username, String firstName, String lastName, String password, String email, int gp_id) {
         this.setClientID(id);
         this.setUsername(username);
+        this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setPassword(password);
         this.setEmail(email);
+        this.setGpID(gp_id);
         fullName = firstName + lastName;
     }
 
@@ -40,15 +44,11 @@ public class Client {
         this.password = password;
     }
 
-    public void setUsername() {
-        this.username = username;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName() {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -72,6 +72,12 @@ public class Client {
         this.email = email;
     }
 
+    public int getGpID() {
+        return id;
+    }
 
+    public void setGpID(int gp_id) {
+        this.gp_id = gp_id;
+    }
 
 }

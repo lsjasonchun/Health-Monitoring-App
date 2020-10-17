@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     final String TAG = "LoginActivity";
     EditText login_Username, login_Password;
     Button login_Button, loginRegister_Button;
+    CheckBox login_ShowPassword;
     TextView tvRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         loginRegister_Button = (Button)findViewById(R.id.login_registerButton);
         loginRegister_Button.setOnClickListener(this);
+
+        login_ShowPassword = (CheckBox) findViewById(R.id.login_showPassword);
+        login_ShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    login_Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+                else {
+                    login_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
 
 //        tvRegister = (TextView)findViewById(R.id.tvRegister);
 //        tvRegister.setOnClickListener(new View.OnClickListener() {
