@@ -6,18 +6,18 @@ public class GP {
     private int gpId, gpContact;
 
     public GP(int gpId, int gpContact, String clinic, String gp, String gpEmail) {
-        this.setClientID(gpId);
+        this.setGpID(gpId);
         this.setGpClinic(clinic);
         this.setGpName(gp);
-        this.setPassword(gpContact);
+        this.setGpContact(gpContact);
         this.setGpEmail(gpEmail);
     }
 
-    public int getClientID() {
+    public int getGpID() {
         return gpId;
     }
 
-    public void setClientID(int gpId) {
+    public void setGpID(int gpId) {
         this.gpId = gpId;
     }
 
@@ -29,11 +29,11 @@ public class GP {
         this.gpClinic = username;
     }
 
-    public int getPassword() {
+    public int getGpContact() {
         return gpContact;
     }
 
-    public void setPassword(int contact) {
+    public void setGpContact(int contact) {
         this.gpContact = contact;
     }
 
@@ -42,7 +42,7 @@ public class GP {
     }
 
     public void setGpName(String gp) {
-        this.gpName = gpName;
+        this.gpName = gp;
     }
 
     public String getGpEmail() {
@@ -53,6 +53,8 @@ public class GP {
         this.gpEmail = email;
     }
 
-
+    public String toString() {
+        return gpName+" "+gpClinic+" "+gpEmail;
+    }
 
 }

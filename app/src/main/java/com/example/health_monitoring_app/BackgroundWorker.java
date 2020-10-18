@@ -40,6 +40,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         String login_url = "http://192.168.1.65:80/client/login.php";
         String register_url = "http://192.168.1.65:80/client/register.php";
         String fetchProfile_url = "http://192.168.1.65:80/client/client.php";
+        String updateProfile_url = "http://192.168.1.65:80/client/updateUser.php";
+        String fetchGpInfo_url ="http://192.168.1.65:80/client/clientGp.php";
         if(type.equals("login")) {
             try {
                 String username = params[1];
@@ -87,6 +89,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 String firstname = params[3];
                 String lastname = params[4];
                 String email = params[5];
+                String gp_id = params[6];
                 URL url = new URL(register_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -94,11 +97,51 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_Data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
+                String post_Data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
                         + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&"
                         + URLEncoder.encode("first_name", "UTF-8") + "=" + URLEncoder.encode(firstname, "UTF-8") + "&"
                         + URLEncoder.encode("last_name", "UTF-8") + "=" + URLEncoder.encode(lastname, "UTF-8") + "&"
-                        + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                        + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&"
+                        + URLEncoder.encode("gp_id", "UTF-8") + "=" + URLEncoder.encode(gp_id, "UTF-8");
+                bufferedWriter.write(post_Data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                while((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                Log.e(LOG_TAG, "RESULT FROM PHP REGISTER: " +result);
+
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(type.equals("fetchProfile")) {
+            try {
+                Log.e(LOG_TAG,"Inside BackgroundWorker fetchProfile");
+                String username = params[1];
+                URL url = new URL(fetchProfile_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_Data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
                 bufferedWriter.write(post_Data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -124,18 +167,65 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
         }
-        else if(type.equals("fetchProfile")) {
+        else if(type.equals("fetchGpInfo")) {
             try {
-                Log.e(LOG_TAG,"Inside BackgroundWorker fetchProfile");
-                String username = params[1];
-                URL url = new URL(fetchProfile_url);
+                Log.e(LOG_TAG,"Inside BackgroundWorker fetch GP Profile");
+                String gp_id = params[1];
+                URL url = new URL(fetchGpInfo_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_Data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+                String post_Data = URLEncoder.encode("gp_id", "UTF-8") + "=" + URLEncoder.encode(gp_id, "UTF-8");
+                bufferedWriter.write(post_Data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                while((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(type.equals("update")) {
+            try {
+                Log.e(LOG_TAG,"Inside BACKGROUND UPDATE USER");
+                String id = params[1];
+                String username = params[2];
+                String password = params[3];
+                String firstname = params[4];
+                String lastname = params[5];
+                String email = params[6];
+                URL url = new URL(updateProfile_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_Data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") + "&"
+                        + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
+                        + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&"
+                        + URLEncoder.encode("first_name", "UTF-8") + "=" + URLEncoder.encode(firstname, "UTF-8") + "&"
+                        + URLEncoder.encode("last_name", "UTF-8") + "=" + URLEncoder.encode(lastname, "UTF-8") + "&"
+                        + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
                 bufferedWriter.write(post_Data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -184,9 +274,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         else if (result.equals("Insert Successful")) {
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         }
+        else if(result.equals("Username already taken")) {
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        }
         else {
-//            alertDialog.setMessage(result);
-//            alertDialog.show();
             delegate.processFinish(result);
         }
     }

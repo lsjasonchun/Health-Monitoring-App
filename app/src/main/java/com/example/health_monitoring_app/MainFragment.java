@@ -1,6 +1,10 @@
 package com.example.health_monitoring_app;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,12 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class MainFragment extends Fragment {
+
+    private static final int REQUEST_CALL = 1;
     final String TAG = "MAINFRAG";
     ImageButton sosBtn;
     TextView  ewsTv, breathRateTV, tempTV, bloodPressureTV, oxSatTV, heartRateTV, consciousLvlTV;
@@ -57,11 +67,41 @@ public class MainFragment extends Fragment {
         sosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                String emergencyNum = "02108418788";
+//                Intent intent = new Intent(Intent.ACTION_CALL);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.setData(Uri.parse("tel:" + emergencyNum));
+//                startActivity(intent);
+                makeEmergencyCall();
             }
         });
 
         return v;
+    }
+
+    private void makeEmergencyCall(){
+        String emergencyNum = "02108418788";
+
+        if(ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial = "tel:" + emergencyNum;
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+        }
+    }
+
+    // The result of when a permission was requested to user if permission status was not already granted
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                makeEmergencyCall();
+            } else {
+                Toast.makeText(getActivity(), "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public int getEwsValue(float bR, float tem, float bP, float hR, float oS){

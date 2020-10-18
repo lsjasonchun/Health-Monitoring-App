@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/settings_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Bluetooth Setting"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/checkbox_led_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:scaleX="1.7"
+                android:scaleY="1.7"
+                android:text="Toggle LED"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/bluetoothImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/settings_BT_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:text="Connected bluetooth device:"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/settings_bluetooth_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border"
+                android:text="Health-Device-Hexoskin"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:layout_marginHorizontal="15dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="RX:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/settings_read_buffer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.9"
+                    android:ellipsize="end"
+                    android:text="&lt;Read Buffer>" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/settings_turnOn_Btn"
+                style="@style/BluetoothButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Turn on Bluetooth" />
+
+            <Button
+                android:id="@+id/settings_turnOff_Btn"
+                style="@style/BluetoothButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Turn off Bluetooth" />
+
+            <Button
+                android:id="@+id/settings_dicover_Btn"
+                style="@style/BluetoothButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Discover Bluetooth Devices" />
+
+            <Button
+                android:id="@+id/settings_paired_Btn"
+                style="@style/BluetoothButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Get Paired Devices" />
+
+            <TextView
+                android:id="@+id/paired_Tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:text=""
+                android:textColor="#000" />
+
+            <ListView
+                android:id="@+id/devices_list_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:choiceMode="singleChoice" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

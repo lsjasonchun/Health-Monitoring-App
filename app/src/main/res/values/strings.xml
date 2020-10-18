@@ -18,8 +18,16 @@
     <string name="navigation_drawer_open">Open Navgiation drawer</string>
     <string name="navigation_drawer_close">Close Navgiation drawer</string>
     <string name="nav_gp_profile">GP Information</string>
-    <string name="profile_edit_button">Edit Profile Info</string>
+    <string name="profile_submitEdit_button">Submit New Infomation</string>
     <string name="gp_profile_edit_button">Edit Information</string>
     <string name="reg_label">Registration</string>
+    <string name="profile_enableEdit_button">Enable Edit</string>
+    <string name="cancel">Cancel</string>
+    <string name="callGp">Call your GP</string>
+    <string name="dialog_title">Contact GP</string>
+    <string name="dialog_message">Contact your GP to change your GP information</string>
+    <string name="nav_register">Register New Client</string>
+    <string name="nav_head_email">User\'s Email</string>
+    <string name="nav_head_username">User\'s UserName</string>
 
 </resources>
