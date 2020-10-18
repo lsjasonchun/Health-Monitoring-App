@@ -73,11 +73,15 @@
 
         <Button
             android:id="@+id/login_Button"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
             android:text="Login"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/bluetoothWhite"
+            android:background="@color/colorPrimary"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

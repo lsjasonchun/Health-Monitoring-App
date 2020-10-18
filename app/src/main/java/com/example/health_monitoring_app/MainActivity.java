@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     public static final String LOG_TAG = "MAIN ACTIVITY";
     private DrawerLayout drawer;
     public String username;
+    public TextView navUsername, navEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        navUsername = (TextView) headerView.findViewById(R.id.navHead_username);
+        navEmail = (TextView) headerView.findViewById(R.id.navHead_email);
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -105,6 +110,9 @@ public class MainActivity extends AppCompatActivity
             Log.e(LOG_TAG, "GP ID"+fetchedGpID);
 
             clientInfo = new Client(fetchedID, fetchedUsername, fetchedFirstName, fetechedLastName, fetchedPwd, fetchedEmail, fetchedGpID);
+
+            navUsername.setText(clientInfo.getUsername());
+            navEmail.setText(clientInfo.getEmail());
 
             Log.e(LOG_TAG,"USER AND GP ID"+clientInfo.getUsername() +clientInfo.getGpID());
         } catch (Exception e) {

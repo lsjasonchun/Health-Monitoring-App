@@ -5,20 +5,18 @@
 
     <item android:title="Personal Infomation">
         <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_home"
-                    android:icon="@drawable/ic_home_page"
-                    android:title="@string/nav_home"/>
-                <item
-                    android:id="@+id/nav_profile"
-                    android:icon="@drawable/ic_user_info_profile"
-                    android:title="@string/nav_profile"/>
-                <item
-                    android:id="@+id/nav_gp_profile"
-                    android:icon="@drawable/ic_gp_info"
-                    android:title="@string/nav_gp_profile"/>
-            </group>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/ic_home_page"
+                android:title="@string/nav_home" />
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_user_info_profile"
+                android:title="@string/nav_profile" />
+            <item
+                android:id="@+id/nav_gp_profile"
+                android:icon="@drawable/ic_gp_info"
+                android:title="@string/nav_gp_profile" />
         </menu>
     </item>
 
@@ -26,25 +24,25 @@
         <menu>
             <item
                 android:id="@+id/nav_BT_settings"
-                android:title="@string/nav_settings"
                 android:icon="@drawable/ic_settings"
+                android:title="@string/nav_settings"
                 app:showAsAction="never" />
             <item
                 android:id="@+id/nav_info"
-                android:title="@string/nav_info"
                 android:icon="@drawable/ic_info"
+                android:title="@string/nav_info"
                 app:showAsAction="never" />
             <item
                 android:id="@+id/nav_logout"
-                android:title="@string/nav_logout"
                 android:icon="@drawable/ic_logout"
+                android:title="@string/nav_logout"
                 app:showAsAction="never" />
             <item
                 android:id="@+id/nav_register"
-                android:title="@string/nav_register"
                 android:icon="@drawable/ic_register"
-                app:showAsAction="never"
-                android:visible="false"/>
+                android:title="@string/nav_register"
+                android:visible="false"
+                app:showAsAction="never" />
         </menu>
     </item>
 </menu>

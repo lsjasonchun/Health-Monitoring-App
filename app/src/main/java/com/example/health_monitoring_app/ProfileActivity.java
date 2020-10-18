@@ -73,10 +73,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.profile_enableEdit_button:
                 usernameEt.setFocusableInTouchMode(true);
+                usernameEt.setBackgroundResource(R.drawable.border_tint);
                 firstNameEt.setFocusableInTouchMode(true);
+                firstNameEt.setBackgroundResource(R.drawable.border_tint);
                 lastNameEt.setFocusableInTouchMode(true);
+                lastNameEt.setBackgroundResource(R.drawable.border_tint);
                 passwordEt.setFocusableInTouchMode(true);
+                passwordEt.setBackgroundResource(R.drawable.border_tint);
                 emailEt.setFocusableInTouchMode(true);
+                emailEt.setBackgroundResource(R.drawable.border_tint);
                 Log.e(LOG_TAG,"HELLO EDIT BUTTON CLICKED");
                 break;
             case R.id.profile_submitEdit_button:
