@@ -136,9 +136,6 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
             backgroundWorker.execute(type, username, password, firstname, lastname, email, selectGpID);
 
-//            Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
-//            mainIntent.putExtra("ActivityID", "FromRegister");
-//            startActivity(mainIntent);
             finish();
         }
         else {

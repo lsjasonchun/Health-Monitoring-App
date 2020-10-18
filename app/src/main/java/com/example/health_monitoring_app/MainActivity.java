@@ -59,6 +59,17 @@ public class MainActivity extends AppCompatActivity
 
         if(getIntent().getExtras().getString("ActivityID").equals("FromLogin")){
             username = getIntent().getExtras().getString("arg");
+            String gpUser = "";
+            String gpCheck = "gp_";
+
+            if(username.length() > 3) {
+                gpUser = username.substring(0, 3);
+
+                if(gpUser.equals(gpCheck)) {
+                    navigationView.getMenu().findItem(R.id.nav_register).setVisible(true);
+                }
+            }
+
             clientInfo();
         }
     }
