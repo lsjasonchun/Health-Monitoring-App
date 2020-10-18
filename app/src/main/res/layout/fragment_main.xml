@@ -4,31 +4,10 @@
     android:layout_height="match_parent"
     android:paddingTop="0dp">
 
-    <TextView
-        android:id="@+id/main_bt_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:paddingHorizontal="20dp"
-        android:text="Bluetooth Status: "
-        android:textSize="30dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/main_bt_status_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_toRightOf="@+id/main_bt_status"
-        android:paddingHorizontal="20dp"
-        android:text="true"
-        android:textSize="30dp"
-        android:textStyle="bold" />
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="wrap_content"

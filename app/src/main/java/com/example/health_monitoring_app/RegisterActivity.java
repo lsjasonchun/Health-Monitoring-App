@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class RegisterActivity extends AppCompatActivity implements AsyncResponse {
 
@@ -136,7 +137,17 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
             backgroundWorker.execute(type, username, password, firstname, lastname, email, selectGpID);
 
-            finish();
+            try {
+                String registerResult = backgroundWorker.get();
+
+                if(registerResult.equals("Insert Successful")) {
+                    finish();
+                }
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         else {
             Toast.makeText(this, "Select your GP in dropdown above", Toast.LENGTH_SHORT).show();

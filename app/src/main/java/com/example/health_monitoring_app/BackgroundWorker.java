@@ -97,7 +97,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_Data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
+                String post_Data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
                         + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&"
                         + URLEncoder.encode("first_name", "UTF-8") + "=" + URLEncoder.encode(firstname, "UTF-8") + "&"
                         + URLEncoder.encode("last_name", "UTF-8") + "=" + URLEncoder.encode(lastname, "UTF-8") + "&"
@@ -120,6 +120,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
+
+                Log.e(LOG_TAG, "RESULT FROM PHP REGISTER: " +result);
 
                 return result;
             } catch (MalformedURLException e) {
@@ -272,9 +274,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         else if (result.equals("Insert Successful")) {
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         }
+        else if(result.equals("Username already taken")) {
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        }
         else {
-//            alertDialog.setMessage(result);
-//            alertDialog.show();
             delegate.processFinish(result);
         }
     }
