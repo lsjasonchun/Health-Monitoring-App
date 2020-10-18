@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,8 +57,10 @@ public class MainActivity extends AppCompatActivity
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
-        username = getIntent().getExtras().getString("arg");
-        clientInfo();
+        if(getIntent().getExtras().getString("ActivityID").equals("FromLogin")){
+            username = getIntent().getExtras().getString("arg");
+            clientInfo();
+        }
     }
 
     @Override
@@ -88,11 +91,11 @@ public class MainActivity extends AppCompatActivity
             fetchedPwd = jsonObj.getString("password");
             fetchedEmail = jsonObj.getString("email");
             fetchedGpID = jsonObj.getInt("gp_id");
-            Log.e(LOG_TAG, "FIRST NAME"+fetchedFirstName);
+            Log.e(LOG_TAG, "GP ID"+fetchedGpID);
 
             clientInfo = new Client(fetchedID, fetchedUsername, fetchedFirstName, fetechedLastName, fetchedPwd, fetchedEmail, fetchedGpID);
 
-            Log.e(LOG_TAG,"USER AND FIRST"+clientInfo.getUsername() +clientInfo.getFirstName());
+            Log.e(LOG_TAG,"USER AND GP ID"+clientInfo.getUsername() +clientInfo.getGpID());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,6 +127,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 //Need to go back to Login Page.
                 System.exit(0);
+                break;
+            case R.id.nav_register:
+                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
                 break;
         }
 

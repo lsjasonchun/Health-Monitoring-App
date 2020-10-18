@@ -167,7 +167,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         }
         else if(type.equals("fetchGpInfo")) {
             try {
-                Log.e(LOG_TAG,"Inside BackgroundWorker fetchProfile");
+                Log.e(LOG_TAG,"Inside BackgroundWorker fetch GP Profile");
                 String gp_id = params[1];
                 URL url = new URL(fetchGpInfo_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();

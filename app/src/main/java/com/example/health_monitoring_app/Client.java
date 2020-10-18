@@ -73,7 +73,7 @@ public class Client implements Serializable {
     }
 
     public int getGpID() {
-        return id;
+        return gp_id;
     }
 
     public void setGpID(int gp_id) {

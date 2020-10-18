@@ -82,6 +82,7 @@ public class GpActivity extends AppCompatActivity implements AsyncResponse, Back
         clientInfo = (Client) getIntent().getSerializableExtra("arg");
 
         usersGpID = Integer.toString(clientInfo.getGpID());
+        Log.e(LOG_TAG, "USER GP ID"+usersGpID);
 
         gpInfo();
     }
@@ -93,12 +94,12 @@ public class GpActivity extends AppCompatActivity implements AsyncResponse, Back
         backgroundWorker.execute(type, usersGpID);
     }
 
-    private void makeEmergencyCall(String gpContact){
+    private void makeEmergencyCall(String gpContact) {
 
-        if(ContextCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         } else {
             String dial = "tel:" + gpContact;
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
@@ -106,31 +107,28 @@ public class GpActivity extends AppCompatActivity implements AsyncResponse, Back
     }
 
     public void processFinish(String output) {
-        if (Character.isDigit(output.charAt(0))) {
-            Toast.makeText(this, output, Toast.LENGTH_SHORT).show();
-        } else {
-            try {
-                Log.e(LOG_TAG, output);
+        try {
+            Log.e(LOG_TAG, output);
 
-                JSONArray jsonArr = new JSONArray(output);
-                JSONObject jsonObj = jsonArr.getJSONObject(0);
-                fetchedGpID = jsonObj.getInt("gp_id");
-                fetchedGpClinic = jsonObj.getString("gp_clinic");
-                fetechedGpName = jsonObj.getString("gp_name");
-                fetchedGpEmail = jsonObj.getString("gp_email");
-                fetchedGpContact = jsonObj.getInt("gp_clinc_num");
-                Log.e(LOG_TAG, fetechedGpName);
+            JSONArray jsonArr = new JSONArray(output);
+            JSONObject jsonObj = jsonArr.getJSONObject(0);
+            fetchedGpID = jsonObj.getInt("gp_id");
+            fetchedGpClinic = jsonObj.getString("gp_clinic");
+            fetechedGpName = jsonObj.getString("gp_name");
+            fetchedGpEmail = jsonObj.getString("gp_email");
+            fetchedGpContact = jsonObj.getInt("gp_clinc_num");
+            Log.e(LOG_TAG, fetechedGpName);
 
-                gpInfo = new GP(fetchedGpID, fetchedGpContact, fetchedGpClinic, fetechedGpName, fetchedGpEmail);
+            gpInfo = new GP(fetchedGpID, fetchedGpContact, fetchedGpClinic, fetechedGpName, fetchedGpEmail);
 
-                Log.e(LOG_TAG, gpInfo.getGpName());
-                gpNameTv.setText(gpInfo.getGpName());
-                gpClinicTv.setText(gpInfo.getGpClinic());
-                emailTv.setText(gpInfo.getGpEmail());
-                gpContactTv.setText(gpInfo.getGpContact());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Log.e(LOG_TAG, Integer.toString(gpInfo.getGpContact()));
+            gpNameTv.setText(gpInfo.getGpName());
+            gpClinicTv.setText(gpInfo.getGpClinic());
+            emailTv.setText(gpInfo.getGpEmail());
+            gpContactTv.setText(Integer.toString(gpInfo.getGpContact()));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

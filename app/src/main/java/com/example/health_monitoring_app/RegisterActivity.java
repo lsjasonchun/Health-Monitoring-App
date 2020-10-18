@@ -1,5 +1,6 @@
 package com.example.health_monitoring_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -134,6 +135,11 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
         else if(Character.isDigit(selectedGP.charAt(0))) {
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
             backgroundWorker.execute(type, username, password, firstname, lastname, email, selectGpID);
+
+//            Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+//            mainIntent.putExtra("ActivityID", "FromRegister");
+//            startActivity(mainIntent);
+            finish();
         }
         else {
             Toast.makeText(this, "Select your GP in dropdown above", Toast.LENGTH_SHORT).show();
