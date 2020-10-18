@@ -71,28 +71,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_passwordInput" />
 
+        <Button
+            android:id="@+id/login_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Login"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_showPassword" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/login_registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:padding="10dp"
-        android:layout_marginTop="420dp"
-        android:layout_marginHorizontal="80dp"
-        android:text="Register"
-        android:gravity="center"/>
-
-    <Button
-        android:id="@+id/login_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Login"
-        android:layout_toRightOf="@+id/login_registerButton"
-        android:layout_marginTop="420dp"/>
-
 
 </RelativeLayout>

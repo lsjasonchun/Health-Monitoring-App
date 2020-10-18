@@ -26,5 +26,6 @@
     <string name="callGp">Call your GP</string>
     <string name="dialog_title">Contact GP</string>
     <string name="dialog_message">Contact your GP to change your GP information</string>
+    <string name="nav_register">Register New Client</string>
 
 </resources>
