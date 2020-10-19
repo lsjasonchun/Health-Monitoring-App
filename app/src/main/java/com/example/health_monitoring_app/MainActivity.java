@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.health_monitoring_app.POJO.Client;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -142,6 +142,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_BT_settings:
                 Intent btSettinglIntent = new Intent(this, BtSettingActivity.class);
                 startActivity(btSettinglIntent);
+                break;
+            case R.id.nav_info:
+                Intent infoIntent = new Intent(MainActivity.this, InfoActivity.class);
+                startActivity(infoIntent);
                 break;
             case R.id.nav_logout:
                 //Need to go back to Login Page.

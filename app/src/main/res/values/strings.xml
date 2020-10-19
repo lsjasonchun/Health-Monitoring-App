@@ -30,4 +30,11 @@
     <string name="nav_head_email">User\'s Email</string>
     <string name="nav_head_username">User\'s UserName</string>
 
+<!--    Information Strings-->
+    <string name="info_appExpand">This app is for patients of health clinics that have illnesses that needs to be monitored at home. This application collects information from a health device and calculate the Early Warning Score to find out the health condition of the patient.</string>
+    <string name="info_ewsExpand">Early Warning Score is a system that calculate the health condition of a patient based on the values that are recieved from the health device.\nThe Early Warning Score is calculated from the patients Heart Rate, Temperature, Respiratory Rate, Oxygen Saturation, Level of Consciousness.\n\nClick on the Data information section to read more about these values.</string>
+    <string name="info_dataExpand">The data that are collected from the health device are:\nHeart Rate\n   The heart rate is pulse of the patient. The health device collects the user(s) total heart beat for a total time of 30 seconds and multiplying that by 2.\n\nRespiratory Rate\n   Respiratory Rate is the breathing rate of the patient. This is the total breathe rate per minute. The normal breathe rate per minute is between 12 to 20 breathes.\n\nOxygen Saturation\n   Oxygen Saturation is the amount of oxygen that is in the patient(s) bloodstream. The normal range of oxygen saturation for adults is between 94 to 99 percent.\n\nLevel of Consciousness\n   Level of Consciousness is the consciousness of whether a patient is conscious by Responsive by pain, Unresponsive, Responsive to voice or Alert.</string>
+    <string name="info_contactExpand">If you have any questions, complaints or concerns about the app, feel free to send us an email:\nvqq@autuni.ac.nz</string>
+
+
 </resources>

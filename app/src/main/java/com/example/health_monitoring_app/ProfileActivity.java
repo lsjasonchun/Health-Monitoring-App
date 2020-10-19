@@ -1,22 +1,20 @@
 package com.example.health_monitoring_app;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.health_monitoring_app.POJO.Client;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.ExceptionHandler;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;

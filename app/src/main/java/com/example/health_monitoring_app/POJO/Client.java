@@ -1,4 +1,4 @@
-package com.example.health_monitoring_app;
+package com.example.health_monitoring_app.POJO;
 
 import com.google.gson.annotations.SerializedName;
 
