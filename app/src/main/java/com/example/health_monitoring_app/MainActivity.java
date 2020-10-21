@@ -24,7 +24,6 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BackgroundWorker.BackgroundWorkerResponse{
 
-
     BackgroundWorker backgroundWorker = new BackgroundWorker(this);
     public String fetchedUsername, fetchedFirstName, fetechedLastName, fetchedPwd, fetchedEmail;
     public int fetchedID, fetchedGpID;
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity
     public Client clientInfo;
     public static final String LOG_TAG = "MAIN ACTIVITY";
     private DrawerLayout drawer;
-    public String username;
+    public String username, clientInfoString;
     public TextView navUsername, navEmail;
 
     @Override
@@ -56,11 +55,10 @@ public class MainActivity extends AppCompatActivity
         navUsername = (TextView) headerView.findViewById(R.id.navHead_username);
         navEmail = (TextView) headerView.findViewById(R.id.navHead_email);
 
-        if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new MainFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
+//        if(savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                    new MainFragment()).commit();
+//        }
 
         if(getIntent().getExtras().getString("ActivityID").equals("FromLogin")){
             username = getIntent().getExtras().getString("arg");
@@ -114,11 +112,24 @@ public class MainActivity extends AppCompatActivity
             navUsername.setText(clientInfo.getUsername());
             navEmail.setText(clientInfo.getEmail());
 
-            Log.e(LOG_TAG,"USER AND GP ID"+clientInfo.getUsername() +clientInfo.getGpID());
+            clientInfoString = "Client's Fullname: " +clientInfo.getFirstName() + " " + clientInfo.getLastName() +
+                    "\n Client's Email: " + clientInfo.getEmail() + "\n Client's Username: " + clientInfo.getUsername();
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new MainFragment()).commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public String getGpID() {
+        return Integer.toString(fetchedGpID);
+    }
+
+    public String getClientInfoString() {
+        return clientInfoString;
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

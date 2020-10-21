@@ -23,27 +23,6 @@ import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
 import java.util.HashMap;
 
-//public class LoginActivity extends AppCompatActivity {
-//    EditText login_Username, login_Password;
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//
-//        login_Username = (EditText) findViewById(R.id.login_usernameInput);
-//        login_Password = (EditText) findViewById(R.id.login_passwordInput);
-//    }
-//
-//    public void OnLogin(View view) {
-//        String username = login_Username.getText().toString();
-//        String password = login_Password.getText().toString();
-//        String operation = "login";
-//        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-//        backgroundWorker.execute(operation, username, password);
-//    }
-//}
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     final String TAG = "LoginActivity";
     EditText login_Username, login_Password;
@@ -72,21 +51,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
-
-//        tvRegister = (TextView)findViewById(R.id.tvRegister);
-//        tvRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent in = new Intent(getApplicationContext(), RegisterActivity.class);
-//                startActivity(in);
-//            }
-//        });
-    }
-
-    private boolean emptyValidate(EditText etEmail, EditText etPassword) {
-        String email = etEmail.getText().toString();
-        String password = etPassword.getText().toString();
-        return (email.isEmpty() && password.isEmpty());
     }
 
     String password = "";
@@ -135,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
                 loginTask.execute("http://192.168.1.65//client/login.php");
+
                 break;
         }
     }

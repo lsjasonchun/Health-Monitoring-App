@@ -36,5 +36,9 @@
     <string name="info_dataExpand">The data that are collected from the health device are:\nHeart Rate\n   The heart rate is pulse of the patient. The health device collects the user(s) total heart beat for a total time of 30 seconds and multiplying that by 2.\n\nRespiratory Rate\n   Respiratory Rate is the breathing rate of the patient. This is the total breathe rate per minute. The normal breathe rate per minute is between 12 to 20 breathes.\n\nOxygen Saturation\n   Oxygen Saturation is the amount of oxygen that is in the patient(s) bloodstream. The normal range of oxygen saturation for adults is between 94 to 99 percent.\n\nLevel of Consciousness\n   Level of Consciousness is the consciousness of whether a patient is conscious by Responsive by pain, Unresponsive, Responsive to voice or Alert.</string>
     <string name="info_contactExpand">If you have any questions, complaints or concerns about the app, feel free to send us an email:\nvqq@autuni.ac.nz</string>
 
-
+<!--    Mail String-->
+    <string name="email_mediumLvl_subject">URGENT MEDIUM LEVEL: PATIENT EWS IS MEDIUM LEVEL</string>
+    <string name="email_mediumLvl_message">Patient EWS Level is Medium.\n Please contact them to check on them\n\n Patient information is:\n</string>
+    <string name="email_highLvl_subject">URGENT HIGH LEVEL: PATIENT EWS IS HIGH LEVEL</string>
+    <string name="email_highLvl_message">Patient EWS Level is High.\n Please contact them immediately\n Patient information is:\n</string>
 </resources>

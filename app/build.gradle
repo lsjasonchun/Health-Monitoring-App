@@ -34,6 +34,9 @@ dependencies {
     implementation files('libs\\GenAsync.1.2.jar')
     implementation files('libs\\KGJsonConverter.jar')
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation files('libs\\activation.jar')
+    implementation files('libs\\additionnal.jar')
+    implementation files('libs\\mail.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

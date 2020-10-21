@@ -2,6 +2,7 @@ package com.example.health_monitoring_app;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -21,20 +22,45 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-public class MainFragment extends Fragment {
+import com.example.health_monitoring_app.POJO.Client;
+import com.example.health_monitoring_app.POJO.GP;
+import com.kosalgeek.genasync12.AsyncResponse;
+import com.kosalgeek.genasync12.ExceptionHandler;
+import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import static android.content.Context.MODE_PRIVATE;
+
+public class MainFragment extends Fragment implements BackgroundWorker.BackgroundWorkerResponse{
+
+    public static final String LOG_TAG = "MAIN FRAGMENT";
     private static final int REQUEST_CALL = 1;
+    BackgroundWorker backgroundWorker = new BackgroundWorker(getActivity());
     final String TAG = "MAINFRAG";
     ImageButton sosBtn;
     TextView  ewsTv, breathRateTV, tempTV, bloodPressureTV, oxSatTV, heartRateTV, consciousLvlTV;
     String breathRate, temp, bloodPressure, oxySat, heartRate;
     int ewsValue;
+    public int ewsHighLvl= 7;
+    public int ewsMediumLvl= 5;
+    public String usersGpID, fetchedGpEmail, emailSubject, emailMessage, clientInfoString;
+    public boolean sendEmail = false;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
+
+        usersGpID = ((MainActivity) getActivity()).getGpID();
+        clientInfoString = ((MainActivity) getActivity()).getClientInfoString();
+        Log.e(LOG_TAG, "USER GP ID "+usersGpID);
+        Log.e(LOG_TAG,"Clinent info!!!" + clientInfoString);
+        gpInfo();
 
         ewsTv = (TextView) v.findViewById(R.id.main_ews_value);
         breathRateTV = (TextView) v.findViewById(R.id.main_respiratory_value);
@@ -46,7 +72,7 @@ public class MainFragment extends Fragment {
 
         breathRate = "12";
         temp = "38.8";
-        bloodPressure = "250";
+        bloodPressure = "90";
         oxySat = "92.2";
         heartRate = "50";
 
@@ -57,21 +83,13 @@ public class MainFragment extends Fragment {
         oxSatTV.setText(oxySat);
         consciousLvlTV.setText("Alert");
 
-        ewsValue = getEwsValue(Float.parseFloat(breathRate), Float.parseFloat(temp), Float.parseFloat(bloodPressure),
+        getEwsValue(Float.parseFloat(breathRate), Float.parseFloat(temp), Float.parseFloat(bloodPressure),
                 Float.parseFloat(heartRate), Float.parseFloat(oxySat));
-
-        Log.d(TAG, String.valueOf(ewsValue));
-        ewsTv.setText(String.valueOf(ewsValue));
 
         sosBtn = v.findViewById(R.id.main_help_button);
         sosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String emergencyNum = "02108418788";
-//                Intent intent = new Intent(Intent.ACTION_CALL);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.setData(Uri.parse("tel:" + emergencyNum));
-//                startActivity(intent);
                 makeEmergencyCall();
             }
         });
@@ -104,8 +122,9 @@ public class MainFragment extends Fragment {
         }
     }
 
-    public int getEwsValue(float bR, float tem, float bP, float hR, float oS){
+    public void getEwsValue(float bR, float tem, float bP, float hR, float oS){
         int ewsValue = 0;
+        int highLvlCheck = 0;
         int dangerousLvl = 3;
         int mediumLvl = 2;
         int minorLvl = 1;
@@ -114,6 +133,7 @@ public class MainFragment extends Fragment {
         //Breathe Rate EWS Logic
         if((bR >= 25) || (bR <= 9)) {
             ewsValue = ewsValue + dangerousLvl;
+            highLvlCheck = highLvlCheck + 1;
             breathRateTV.setBackgroundColor(Color.parseColor("#FF5555"));
         }
         else if((bR >= 21) && (bR <= 24)) {
@@ -136,12 +156,14 @@ public class MainFragment extends Fragment {
         }
         else if(tem <= 35) {
             ewsValue = ewsValue + dangerousLvl;
+            highLvlCheck = highLvlCheck + 1;
             tempTV.setBackgroundColor(Color.parseColor("#FF5555"));
         }
 
         //Blood Pressure EWS Logic
         if((bP >= 220) || (bP <= 90)) {
             ewsValue = ewsValue + dangerousLvl;
+            highLvlCheck = highLvlCheck + 1;
             bloodPressureTV.setBackgroundColor(Color.parseColor("#FF5555"));
         }
         else if((bP >= 100) && (bP < 100)) {
@@ -156,6 +178,7 @@ public class MainFragment extends Fragment {
         //Heart Rate EWS Logic
         if((hR >= 130) || (hR <= 40)) {
             ewsValue = ewsValue + dangerousLvl;
+            highLvlCheck = highLvlCheck + 1;
             heartRateTV.setBackgroundColor(Color.parseColor("#FF5555"));
         }
         else if((hR >= 110) && (hR < 130)) {
@@ -170,6 +193,7 @@ public class MainFragment extends Fragment {
         //Oxygen Saturation EWS Logic
         if(oS <= 91) {
             ewsValue = ewsValue + dangerousLvl;
+            highLvlCheck = highLvlCheck + 1;
             oxSatTV.setBackgroundColor(Color.parseColor("#FF5555"));
         }
         else if((oS >= 92) && (oS <= 93)) {
@@ -181,6 +205,54 @@ public class MainFragment extends Fragment {
             oxSatTV.setBackgroundColor(Color.parseColor("#32CD32"));
         }
 
-        return ewsValue;
+        if(ewsValue >= ewsHighLvl || highLvlCheck >= 1) {
+            ewsTv.setBackgroundColor(Color.parseColor("#FF5555"));
+            emailSubject = getString(R.string.email_highLvl_subject);
+            emailMessage = getString(R.string.email_highLvl_message) + clientInfoString;
+            Log.e(LOG_TAG, "EWS METHOD: HIGHLEVEL");
+            sendEmail = true;
+        }
+        else if(ewsValue >= ewsMediumLvl && ewsValue < ewsHighLvl) {
+            ewsTv.setBackgroundColor(Color.parseColor("#FFDF00"));
+            emailSubject = getString(R.string.email_mediumLvl_subject);
+            emailMessage = getString(R.string.email_mediumLvl_message) + clientInfoString;
+            Log.e(LOG_TAG, "EWS METHOD: MEDIUM LEVEL");
+            sendEmail = true;
+        }
+
+        ewsTv.setText(String.valueOf(ewsValue));
+    }
+
+    private void sendEmail(String fetchedGpEmail, String subject, String message) {
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getActivity(), this.fetchedGpEmail, subject, message);
+
+        javaMailAPI.execute();
+    }
+
+    private void gpInfo() {
+        String type = "fetchGpInfo";
+        backgroundWorker.delegate = this;
+        backgroundWorker.execute(type, usersGpID);
+    }
+
+    public void processFinish(String output) {
+        try {
+            Log.e(LOG_TAG, output);
+
+            JSONArray jsonArr = new JSONArray(output);
+            JSONObject jsonObj = jsonArr.getJSONObject(0);
+            fetchedGpEmail = jsonObj.getString("gp_email");
+            Log.e(LOG_TAG, fetchedGpEmail);
+
+
+            if(sendEmail == true) {
+                Log.e("SENDEMAIL TRUE: ", emailMessage + " " +emailSubject);
+                sendEmail(fetchedGpEmail, emailSubject, emailMessage);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

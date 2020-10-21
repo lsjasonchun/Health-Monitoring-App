@@ -256,8 +256,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+//        alertDialog = new AlertDialog.Builder(context).create();
+//        alertDialog.setTitle("Login Status");
     }
 
     @Override
