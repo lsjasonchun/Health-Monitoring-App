@@ -22,18 +22,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.health_monitoring_app.POJO.Client;
-import com.example.health_monitoring_app.POJO.GP;
-import com.kosalgeek.genasync12.AsyncResponse;
-import com.kosalgeek.genasync12.ExceptionHandler;
-import com.kosalgeek.genasync12.PostResponseAsyncTask;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class MainFragment extends Fragment implements BackgroundWorker.BackgroundWorkerResponse{
 
@@ -70,7 +60,7 @@ public class MainFragment extends Fragment implements BackgroundWorker.Backgroun
         oxSatTV = (TextView) v.findViewById(R.id.main_oxygen_sat_value);
         consciousLvlTV = (TextView) v.findViewById(R.id.main_consciousness_value);
 
-        breathRate = "12";
+        breathRate = "11";
         temp = "38.8";
         bloodPressure = "90";
         oxySat = "92.2";
@@ -98,7 +88,7 @@ public class MainFragment extends Fragment implements BackgroundWorker.Backgroun
     }
 
     private void makeEmergencyCall(){
-        String emergencyNum = "02108418788";
+        String emergencyNum = "111";
 
         if(ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -131,7 +121,7 @@ public class MainFragment extends Fragment implements BackgroundWorker.Backgroun
         Log.d(TAG, String.valueOf(tem));
 
         //Breathe Rate EWS Logic
-        if((bR >= 25) || (bR <= 9)) {
+        if((bR >= 25) || (bR <= 8)) {
             ewsValue = ewsValue + dangerousLvl;
             highLvlCheck = highLvlCheck + 1;
             breathRateTV.setBackgroundColor(Color.parseColor("#FF5555"));

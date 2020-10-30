@@ -37,11 +37,12 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://192.168.1.65:80/client/login.php";
-        String register_url = "http://192.168.1.65:80/client/register.php";
-        String fetchProfile_url = "http://192.168.1.65:80/client/client.php";
-        String updateProfile_url = "http://192.168.1.65:80/client/updateUser.php";
-        String fetchGpInfo_url ="http://192.168.1.65:80/client/clientGp.php";
+        String login_url = "http://192.168.1.66:80/client/login.php";
+        String register_url = "http://192.168.1.66:80/client/register.php";
+        String fetchProfile_url = "http://192.168.1.66:80/client/client.php";
+        String updateProfile_url = "http://192.168.1.66:80/client/updateUser.php";
+        String fetchGpInfo_url ="http://192.168.1.66:80/client/clientGp.php";
+        String fetchProfileByID_url = "http://192.168.1.66:80/client/clientByID.php";
         if(type.equals("login")) {
             try {
                 String username = params[1];
@@ -130,7 +131,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
         }
-        else if(type.equals("fetchProfile")) {
+        else if(type.equals("fetchProfileByUsername")) {
             try {
                 Log.e(LOG_TAG,"Inside BackgroundWorker fetchProfile");
                 String username = params[1];
@@ -142,6 +143,43 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_Data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+                bufferedWriter.write(post_Data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                while((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(type.equals("fetchProfileByID")) {
+            try {
+                Log.e(LOG_TAG,"Inside BackgroundWorker fetchProfile");
+                String id = params[1];
+                URL url = new URL(fetchProfileByID_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_Data = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
                 bufferedWriter.write(post_Data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

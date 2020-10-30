@@ -15,18 +15,19 @@ import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.ExceptionHandler;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener, BackgroundWorker.BackgroundWorkerResponse{
 
     public static EditText usernameEt, firstNameEt, lastNameEt, passwordEt, emailEt;
     public String loggedUsername;
     BackgroundWorker backgroundWorker = new BackgroundWorker(this);
     JSONObject jsonObject;
     public Client clientInfo;
-    String currentUsername, currentPwd, currentFirstname, currentLastname, currentEmail;
+    String currentUsername, currentPwd, currentFirstname, currentLastname, currentEmail, username;
     String updateUsername, updatePwd, updateFirstName, updateLastName, updateEmail;
     public int fetchedID, fetchedGpID;
     public static final String LOG_TAG = "myLogs";
@@ -56,20 +57,60 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         emailEt.setFocusable(false);
 
         clientInfo = (Client) getIntent().getSerializableExtra("arg");
+        username = clientInfo.getUsername();;
+        fetchedID = clientInfo.getClientID();
+        clientInfo();
 
-        currentUsername = clientInfo.getUsername();
-        currentPwd = clientInfo.getPassword();
-        currentFirstname = clientInfo.getFirstName();
-        currentLastname = clientInfo.getLastName();
-        currentEmail = clientInfo.getEmail();
-        Log.e(LOG_TAG,"PROFILE" +clientInfo.getFirstName() + clientInfo.getLastName() +clientInfo.getGpID()+ clientInfo.getClientID());
+//        currentUsername = clientInfo.getUsername();
+//        currentPwd = clientInfo.getPassword();
+//        currentFirstname = clientInfo.getFirstName();
+//        currentLastname = clientInfo.getLastName();
+//        currentEmail = clientInfo.getEmail();
+//        Log.e(LOG_TAG,"PROFILE" +clientInfo.getFirstName() + clientInfo.getLastName() +clientInfo.getGpID()+ clientInfo.getClientID());
 
         Log.e(LOG_TAG,clientInfo.getUsername());
-        usernameEt.setText(clientInfo.getUsername());
-        firstNameEt.setText(clientInfo.getFirstName());
-        lastNameEt.setText(clientInfo.getLastName());
-        passwordEt.setText(clientInfo.getPassword());
-        emailEt.setText(clientInfo.getEmail());
+//        usernameEt.setText(clientInfo.getUsername());
+//        firstNameEt.setText(clientInfo.getFirstName());
+//        lastNameEt.setText(clientInfo.getLastName());
+//        passwordEt.setText(clientInfo.getPassword());
+//        emailEt.setText(clientInfo.getEmail());
+    }
+
+    private void clientInfo() {
+        String type = "fetchProfileByID";
+        backgroundWorker.delegate = this;
+        backgroundWorker.execute(type, Integer.toString(fetchedID));
+    }
+
+    public void processFinish(String output) {
+        try {
+            Log.e(LOG_TAG,output);
+            String fetchedUsername, fetchedFirstName, fetechedLastName, fetchedPwd, fetchedEmail;
+
+            JSONArray jsonArr = new JSONArray(output);
+            JSONObject jsonObj = jsonArr.getJSONObject(0);
+            fetchedID = jsonObj.getInt("id");
+            currentUsername = jsonObj.getString("username");
+            currentFirstname = jsonObj.getString("first_name");
+            currentLastname = jsonObj.getString("last_name");
+            currentPwd = jsonObj.getString("password");
+            currentEmail = jsonObj.getString("email");
+            fetchedGpID = jsonObj.getInt("gp_id");
+            Log.e(LOG_TAG, "GP ID"+fetchedGpID);
+
+            clientInfo = new Client(fetchedID, currentUsername, currentFirstname, currentLastname, currentPwd, currentEmail, fetchedGpID);
+
+            usernameEt.setText(clientInfo.getUsername());
+            firstNameEt.setText(clientInfo.getFirstName());
+            lastNameEt.setText(clientInfo.getLastName());
+            passwordEt.setText(clientInfo.getPassword());
+            emailEt.setText(clientInfo.getEmail());
+            String clientInfoString = "Client's Fullname: " +clientInfo.getFirstName() + " " + clientInfo.getLastName() +
+                    "\n Client's Email: " + clientInfo.getEmail() + "\n Client's Username: " + clientInfo.getUsername();
+            Log.e(LOG_TAG,clientInfoString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -126,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                 editor.putString("email", updateEmail);
                                 editor.commit();
                                 Toast.makeText(getApplicationContext(),
-                                        "Record Updated Successfully", Toast.LENGTH_LONG).show();
+                                        s, Toast.LENGTH_LONG).show();
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),
@@ -142,7 +183,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             }
                         }
                     });
-                    updateTask.execute("http://192.168.1.65//client/updateUser.php");
+                    updateTask.execute("http://192.168.1.66//client/updateUser.php");
+                    finish();
                 }
                 break;
         }

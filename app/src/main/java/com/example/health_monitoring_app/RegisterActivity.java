@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
         });
 
         PostResponseAsyncTask readData = new PostResponseAsyncTask(this, this);
-        readData.execute("http://192.168.1.65//client/gp.php");
+        readData.execute("http://192.168.1.66//client/gp.php");
     }
 
     @Override

@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void clientInfo() {
-        String type = "fetchProfile";
+        String type = "fetchProfileByUsername";
         backgroundWorker.delegate = this;
         backgroundWorker.execute(type, username);
     }

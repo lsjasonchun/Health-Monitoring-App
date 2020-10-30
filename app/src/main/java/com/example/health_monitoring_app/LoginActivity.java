@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
-                loginTask.execute("http://192.168.1.65//client/login.php");
+                loginTask.execute("http://192.168.1.66//client/login.php");
 
                 break;
         }
